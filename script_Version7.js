@@ -1,15 +1,15 @@
-// --- Lời chúc hiệu ứng typewriter ---
 const greetings = [
-  "Chúc mừng sinh nhật bạn Linh!",
-  "Chúc bạn tuổi mới thật nhiều niềm vui, sức khỏe.",
-  "Tuổi mới 21-08-1999, mong mọi điều tốt đẹp sẽ đến.",
-  "Luôn tỏa sáng, luôn hạnh phúc!",
-  "Sinh nhật thật vui vẻ nhé!"
+  "Hi Linh, bạn thật là điều tuyệt vời nhất mình từng gặp.",
+  "Chúc mừng sinh nhật 21-08-1999!",
+  "Chúc bạn luôn vui vẻ, xinh đẹp và hạnh phúc.",
+  "Mong rằng mọi điều tốt đẹp sẽ đến với bạn.",
+  "Hãy luôn rực rỡ như pháo hoa và hạnh phúc như hôm nay!"
 ];
 
 const typewriterContainer = document.getElementById("typewriter-container");
 const typewriterDiv = document.getElementById("typewriter");
 const cakeContainer = document.getElementById("cake-container");
+
 let currentLine = 0;
 let charIndex = 0;
 
@@ -39,7 +39,7 @@ function typeLine() {
 }
 window.addEventListener("DOMContentLoaded", typeLine);
 
-// --- Pháo hoa đơn giản ---
+// --- Pháo hoa ---
 const canvas = document.getElementById('fireworks');
 const ctx = canvas.getContext('2d');
 let fireworks = [];
@@ -114,17 +114,23 @@ function launchFirework(x, y) {
   fireworks.push(new Firework(x, y));
 }
 
-// --- Tắt nến và pháo hoa ---
-const flame = document.getElementById("flame");
-const wishBtn = document.getElementById("wish-btn");
+// --- Bánh sinh nhật & Tắt nến ---
+const wishForm = document.getElementById("wish-form");
+const wishInput = document.getElementById("wish-input");
 const wishResult = document.getElementById("wish-result");
+const flame = document.getElementById("flame");
+const birthdaySong = document.getElementById("birthdaySong");
 let candleLit = true;
 
-wishBtn.addEventListener('click', function() {
+wishForm.addEventListener('submit', function(e) {
+  e.preventDefault();
   if (!candleLit) return;
   candleLit = false;
   flame.style.display = "none";
-  wishResult.innerHTML = "Chúc mừng sinh nhật! 🎉";
+  const wish = wishInput.value.trim();
+  wishResult.innerHTML = wish ? `Điều ước của bạn: <span style="color:#ad1457">${wish}</span><br/>Chúc bạn sớm đạt được!` : "Chúc mừng sinh nhật! 🎉";
+  birthdaySong.currentTime = 0;
+  birthdaySong.play();
   for (let i = 0; i < 6; i++) {
     setTimeout(() =>
       launchFirework(
@@ -135,7 +141,22 @@ wishBtn.addEventListener('click', function() {
   }
 });
 
-// Click canvas để nổ pháo hoa bất kỳ chỗ nào
+document.addEventListener('keydown', (e) => {
+  if (e.key === "m" || e.key === "M") {
+    birthdaySong.muted = !birthdaySong.muted;
+    alert(birthdaySong.muted ? "Đã tắt nhạc nền!" : "Đã bật nhạc nền!");
+  }
+});
+
 canvas.addEventListener('click', (e) => {
   launchFirework(e.clientX, e.clientY);
+});
+
+cakeContainer.addEventListener('click', (e) => {
+  if (e.target.classList.contains("cake") || e.target.classList.contains("layer") || e.target.classList.contains("icing")) {
+    launchFirework(
+      window.innerWidth/2 + (Math.random()-0.5)*120,
+      window.innerHeight/2 - 100 + (Math.random()-0.5)*80
+    );
+  }
 });
