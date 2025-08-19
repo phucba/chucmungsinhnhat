@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
 body {
   margin: 0;
   padding: 0;
@@ -12,6 +13,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background: linear-gradient(120deg, #f7cac9 0%, #fbeee6 100%);
 }
 #typewriter {
   font-size: 2em;
@@ -24,22 +26,30 @@ body {
   min-height: 120px;
   text-shadow: 1px 1px 6px #fff3, 0 0 10px #f8bbd0bb;
 }
+
 .hidden {
   display: none !important;
 }
+
+/* Bánh sinh nhật */
 #cake-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  background: linear-gradient(120deg, #fbeee6 0%, #f7cac9 100%);
+  z-index: 2;
+  position: relative;
 }
+
 .cake {
   position: relative;
   width: 220px;
   height: 220px;
   margin-bottom: 18px;
 }
+
 .plate {
   position: absolute;
   bottom: 0;
@@ -87,6 +97,8 @@ body {
   z-index: 3;
   box-shadow: 0 0 12px #fff6;
 }
+
+/* Candle */
 .candle {
   position: absolute;
   left: 106px;
@@ -119,9 +131,26 @@ body {
   70%  { transform: translateX(-48%) scaleY(0.95) scaleX(0.93); }
   100% { transform: translateX(-50%) scaleY(1.0) scaleX(1.0); }
 }
-#wish-btn {
-  padding: 10px 32px;
-  font-size: 1.15em;
+
+#wish-form {
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#wish-input {
+  font-size: 1.1em;
+  padding: 8px 20px;
+  border-radius: 16px;
+  border: 1px solid #f06292;
+  outline: none;
+  min-width: 220px;
+  box-shadow: 0 2px 8px #fff9;
+  font-family: inherit;
+}
+#wish-form button {
+  padding: 9px 26px;
+  font-size: 1.07em;
   background: linear-gradient(90deg,#ffd54f,#f06292,#90caf9);
   color: #fff;
   border: none;
@@ -130,9 +159,8 @@ body {
   font-family: inherit;
   box-shadow: 0 2px 8px #f0629233;
   transition: background .3s;
-  margin-bottom: 16px;
 }
-#wish-btn:hover {
+#wish-form button:hover {
   background: linear-gradient(90deg,#f06292,#ffd54f,#90caf9);
 }
 #wish-result {
@@ -149,6 +177,7 @@ canvas#fireworks {
   pointer-events: none;
   z-index: 99;
 }
+
 @media (max-width: 600px) {
   #typewriter {
     font-size: 1.16em;
@@ -157,4 +186,5 @@ canvas#fireworks {
   }
   .cake { width: 115px; height: 115px;}
   .plate, .layer, .icing, .candle { transform: scale(0.52);}
+  #wish-input { min-width: 60px;}
 }
